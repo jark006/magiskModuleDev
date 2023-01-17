@@ -6,8 +6,11 @@ $BOOTMODE || abort "
 !!! ONLY support ARM64
 !!! 仅支持 ARM64"
 
-chmod a+x $MODPATH/batteryMonitor
+module_id="$(grep_prop id $MODPATH/module.prop)"
+module_name="$(grep_prop name $MODPATH/module.prop)"
+module_version="$(grep_prop version $MODPATH/module.prop)"
+
+chmod a+x $MODPATH/$module_id
 chmod a+x $MODPATH/service.sh
 
-module_version="$(grep_prop version $MODPATH/module.prop)"
-echo "- 安装 $module_version 完毕, 重启生效"
+echo "- 安装 $module_name $module_version 完毕, 重启生效"

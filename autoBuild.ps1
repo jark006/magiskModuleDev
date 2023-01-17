@@ -18,11 +18,11 @@ function autoMake {
 
     log "开始自动构建"
 
-    $id=Get-Content ./magiskModule/module.prop | Where-Object { $_ -match "id="}
+    $id=Get-Content magiskModule/module.prop | Where-Object { $_ -match "id="}
     $id=$id.split('=')[1]
-    $version=Get-Content ./magiskModule/module.prop | Where-Object { $_ -match "version="}
+    $version=Get-Content magiskModule/module.prop | Where-Object { $_ -match "version="}
     $version=$version.split('=')[1]
-    $versionCode=Get-Content ./magiskModule/module.prop | Where-Object { $_ -match "versionCode="}
+    $versionCode=Get-Content magiskModule/module.prop | Where-Object { $_ -match "versionCode="}
     $versionCode=$versionCode.split('=')[1]
     $zipFile="${id}_${version}.zip"
 
@@ -55,7 +55,7 @@ function autoMake {
     # log "align_fix完成"
 
     log "开始打包zip"
-    Copy-Item build/$id ./magiskModule/ -force
+    Copy-Item build/$id magiskModule/$id -force
 
     & ./7za.exe a $zipFile ./magiskModule/* | Out-Null
     if ( -not $? ) {
@@ -63,6 +63,8 @@ function autoMake {
         exit
     }
     log "打包完毕: $zipFile"
+
+    Remove-Item magiskModule/$id -Force
     
     log "构建流程成功"
 }

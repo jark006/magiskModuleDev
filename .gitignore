@@ -33,5 +33,4 @@
 .vs
 .cache
 build/*
-magiskModule/batteryMonitor
 *.zip
