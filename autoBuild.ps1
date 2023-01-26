@@ -9,12 +9,12 @@ function log {
     )
     Write-Output ("[{0}] {1}" -f (Get-Date), $LogMessage)
 }
-    
+
 if ( (Test-Path build) -ne "True" ) {
     mkdir build
 }
 
-log "开始自动构建"
+log "Building..."
 
 $id = Get-Content magiskModule/module.prop | Where-Object { $_ -match "id=" }
 $id = $id.split('=')[1]
@@ -38,10 +38,10 @@ $clang = "${windowsToolchainsDir}/clang++.exe"
 # Android 10+ Q+ SDK29+ (如果最低支持SDK是28或以下，则需要进行align_fix)
 & $clang --target=aarch64-linux-android29 -std=c++17 -static -s -O2 -Wall -Iinclude src/*.cpp -o build/$id
 if ( -not $? ) {
-    log "编译ARM64失败"
+    log "Compile fail"
     exit
 }
-log "编译ARM64成功"
+log "Compile success"
 
 # (如果最低支持SDK是28或以下，则需要进行align_fix)
 # $res=./align_fix.exe build/$id
@@ -52,16 +52,16 @@ log "编译ARM64成功"
 # log $res
 # log "align_fix完成"
 
-log "开始打包zip"
+log "Packing zip..."
 Copy-Item build/$id magiskModule/$id -force
 
 & ./7za.exe a $zipFile ./magiskModule/* | Out-Null
 if ( -not $? ) {
-    log "打包失败"
+    log "Pack fail"
     exit
 }
-log "打包完毕: $zipFile"
+log "Packed: $zipFile"
 
 Remove-Item magiskModule/$id -Force
-    
-log "构建流程成功"
+
+log "Done"
