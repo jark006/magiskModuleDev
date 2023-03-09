@@ -3,6 +3,7 @@
         {
             "name": "arm64",
             "includePath": [
+                "D:/AndroidSDK/ndk/25.2.9519653/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include",
                 "${workspaceFolder}/include"
             ],
             "defines": [
@@ -11,14 +12,14 @@
                 "NDEBUG",
                 "__linux__",
                 "__aarch64__",
-                "__ANDROID_MIN_SDK_VERSION__ 29"
+                "__ANDROID_MIN_SDK_VERSION__ 29",
+                "__ANDROID_API__ 29"
             ],
-            "compilerPath": "D:/AndroidSDK/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android29-clang.cmd",
             "cStandard": "c17",
-            "cppStandard": "c++17",
+            "cppStandard": "c++20",
             "intelliSenseMode": "linux-clang-arm64",
             "compilerArgs": [
-                "-static ",
+                "-static",
                 "-Wall"
             ]
         }

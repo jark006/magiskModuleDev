@@ -104,8 +104,8 @@ bool startWith(const char* prefix, const char* target) {
 }
 
 string parentDir(string path) {
-  if (path.back() == '/')
-    path.pop_back();
+  if (path.empty())return path;
+  if (path.back() == '/') path.pop_back();
   auto idx = path.find_last_of('/');
   return idx == string::npos ? path : path.substr(0, idx);
 }
