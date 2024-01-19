@@ -24,8 +24,9 @@ int main(int argc, char** argv) {
         tips = "初始化 电量: " + to_string(nowCapacity) + "%  电池温度: " + to_string(temperature / 10) + "℃";
       } else {
         auto deltaMinute = nowMinute - lastMinute;
+        string timeStr = deltaMinute < 60 ? (to_string(deltaMinute) + "分") : (to_string(deltaMinute / 60) + "时" + to_string(deltaMinute % 60) + "分");
         tips = "电量: " + to_string(lastCapacity) + "%" + (nowCapacity > lastCapacity ? "充到" : "用到") +
-          to_string(nowCapacity) + "% 耗时:" + to_string(deltaMinute) + "分  电池温度:" + to_string(temperature / 10) + "℃";
+          to_string(nowCapacity) + "% 耗时:" + timeStr + "  电池温度:" + to_string(temperature / 10) + "℃";
 
         lastMinute = nowMinute;
         lastCapacity = nowCapacity;

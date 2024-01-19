@@ -10,7 +10,7 @@
 
 1. 如果你已安装`Android Studio`，其SDK目录下一般含有NDK工具链，否则需要单独下载 [NDK工具链](https://developer.android.com/ndk/downloads) 并解压，路径最好不要包含中文。
 
-1. 在 `build.ps1` 和 `buildOnly.ps1` 脚本中给 `$windowsToolchainsDir` 设置 NDK工具链路径。
+1. 在 `build.ps1` 和 `buildOnly.ps1` 脚本中给 `$NDK_PATH` 设置 NDK工具链路径。
 
 1. 在 `.vscode/c_cpp_properties.json` 文件的 `includePath` 里设置 `NDK头文件` 路径，助于 vsCode IntelliSense 智能提示。
 
@@ -20,7 +20,7 @@
 
 1. 执行 `build.ps1` 一键编译并自动打包zip, 可以直接到Magisk刷入。
 
-1. 执行 `buildOnly.ps1` 则只编译，编译的可执行文件将输出到 `build/`。
+1. 执行 `buildOnly.ps1` 则只编译，不打包成zip，编译的可执行文件将输出到 `build/`。
 
 1. `build.ps1` 已设置为默认`启动调试`脚本，在 vsCode 下按 `F5` 即可一键执行。
 
